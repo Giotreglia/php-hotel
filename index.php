@@ -48,33 +48,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>Php Hotel</title>
 </head>
 <body>
 
-<ul>
+<div class="container p-5">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr class="bg-primary text-light">
+                <?php
+                    
+                        foreach ($hotels['0'] as $key => $value) {
 
-    <?php
-         foreach ($hotels as $hotel) {
-            foreach ($hotel as $key => $value) {
+                            if ($key === 'distance_to_center') {
+                                $key = 'distance to center';
+                            }
+                            echo '<th scope="col">' . ucfirst($key) . '</th>';
 
-                if ($value === true) {
-                    $value = 'yes';
-                } else if ($value === false) {
-                    $value = 'no';
-                } else if ($key === 'distance_to_center') {
-                    $key = 'distance to center';
-                    $value .= ' km';
+                        } 
+                ?>
+            </tr>
+        </thead>
+        <tbody>
+        
+            <?php
+                foreach ($hotels as $hotel) {
+                    echo '<tr>';
+                    foreach ($hotel as $key => $value) {
+
+                        if ($value === true) {
+                            $value = 'yes';
+                        } else if ($value === false) {
+                            $value = 'no';
+                        } else if ($key === 'distance_to_center') {
+                            $key = 'distance to center';
+                            $value .= ' km';
+                        }
+                        echo '<td>' . ucfirst($value) . '</td>';
+
+                    } 
+                    echo '</tr>';
                 }
-                echo '<li>' . $key . ': ' . $value . '</li>';
+            ?>
+        </tbody>
+    </table>
+</div>
 
-            } 
-            echo '<hr>';
-        }
-    ?>
-
-</ul>
-
-    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>   
 </body>
 </html>
