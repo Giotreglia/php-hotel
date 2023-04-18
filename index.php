@@ -58,12 +58,15 @@
          foreach ($hotels as $hotel) {
             foreach ($hotel as $key => $value) {
 
-                if ($key == 'parking' && $value === true) {
+                if ($value === true) {
                     $value = 'yes';
-                } else if ($key == 'parking' && $value === false) {
+                } else if ($value === false) {
                     $value = 'no';
+                } else if ($key === 'distance_to_center') {
+                    $key = 'distance to center';
+                    $value .= ' km';
                 }
-                echo '<li>' . $value . '</li>';
+                echo '<li>' . $key . ': ' . $value . '</li>';
 
             } 
             echo '<hr>';
