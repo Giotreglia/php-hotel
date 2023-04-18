@@ -60,7 +60,7 @@
         if (!$_GET) {
             $result = '';
         } elseif ($_GET) {
-            $result = 'I tuoi criteri di ricerca sono: categoria "' . $select . '" e voto: ' . $vote;
+            $result = 'I tuoi criteri di ricerca sono: categoria "' . $select . '" e voto "' . $vote . '"' . '.';
         }
     } 
 
@@ -112,7 +112,9 @@
 
 
     <div class="container">
+
         <span><?php echo $result ?></span>
+
         <table class="table table-striped table-hover mt-5 rounded">
             <thead>
                 <tr class="bg-primary text-light">
