@@ -42,16 +42,25 @@
 
     $select = $_GET['select'];
     $vote = $_GET['vote'];
+    $result = '';
+
 
     $hotelsFiltered = [];
 
     foreach ($hotels as $hotel) {
-        if ($hotel[$select] == true || $hotel['vote'] >= $vote) {
+        if ($hotel[$select] == true && $hotel['vote'] >= $vote) {
             $hotelsFiltered[] = $hotel;
         } else if ($select == 'All' && $vote == '') {
             $hotelsFiltered = $hotels;
         } else if (!$_GET) {
             $hotelsFiltered = $hotels;
+        } else if ($select == 'All' && $hotel['vote'] >= $vote) {
+            $hotelsFiltered[] = $hotel;
+        }
+        if (!$_GET) {
+            $result = '';
+        } elseif ($_GET) {
+            $result = 'I tuoi criteri di ricerca sono: categoria "' . $select . '" e voto: ' . $vote;
         }
     } 
 
@@ -80,7 +89,7 @@
     </header>
         
         <div class="container">
-            <nav class="navbar bg-primary-subtle my-5 p-3 rounded">
+            <nav class="navbar bg-primary-subtle mt-5 mb-2 p-3 rounded">
                 <div class="container-fluid">
                     <form action="index.php" method="GET" class="w-100 d-flex align-items-center gap-3 justify-content-between">
                         <div class="d-flex align-items-center w-50 gap-2">
@@ -103,7 +112,7 @@
 
 
     <div class="container">
-
+        <span><?php echo $result ?></span>
         <table class="table table-striped table-hover mt-5 rounded">
             <thead>
                 <tr class="bg-primary text-light">
